@@ -38,6 +38,11 @@ public class Voto {
 	public void setData(LocalDate data) {
 		Data = data;
 	}
+
+	@Override
+	public String toString() {
+		return nomecorso + " " + votoEsame + " " + Data +"\n";
+	}
 	
 	
 	
