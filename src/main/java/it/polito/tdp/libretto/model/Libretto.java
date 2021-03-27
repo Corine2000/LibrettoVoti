@@ -16,7 +16,7 @@ public class Libretto {
 	public Libretto() {
 		
 		this.voti = new  LinkedList<Voto>();
-		LibrettoMigliorato = new  LinkedList<Voto>(); 
+		LibrettoMigliorato = new  ArrayList<Voto>(); 
 		mappaLibretto = new HashMap<String, Voto>();
 		
 	}
@@ -34,7 +34,7 @@ public class Libretto {
 		       if(v.getVotoEsame()>= 18 && v.getVotoEsame()<24) {
 		    	  v.setVotoEsame(v.getVotoEsame()+1);
 		    	  LibrettoMigliorato.add(v);
-		        }
+		         }
 		       if(v.getVotoEsame()>=24 && v.getVotoEsame()<29) {
 		    	   v.setVotoEsame(v.getVotoEsame()+2);
 			    	  LibrettoMigliorato.add(v);
