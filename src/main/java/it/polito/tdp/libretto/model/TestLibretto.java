@@ -1,5 +1,6 @@
 package it.polito.tdp.libretto.model;
 
+import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,6 +17,8 @@ public class TestLibretto {
 		//ora creo 10 oggeti della classe libretto
 													//anno,mese,giorno
 		Voto v1 = new Voto("chimica", 28, LocalDate.of(2019, 05, 18));
+		Voto v11 = new Voto("chimica", 28, LocalDate.of(2019, 05, 18));
+
 		Voto v2 = new Voto("Matematica per L'ingegneria", 26, LocalDate.of(2016, 12, 10));
 		Voto v3 = new Voto("chimica Sperimentale per l'ingegneria", 22, LocalDate.of(2021, 01, 25));
 		Voto v4 = new Voto("scienze applicate", 20, LocalDate.of(2018, 05, 18));
@@ -26,7 +29,9 @@ public class TestLibretto {
 		Voto v9 = new Voto("Reattori chimici", 23, LocalDate.of(2021, 02, 18));
 		Voto v10= new Voto("droni", 25, LocalDate.of(2012, 9, 4));
 		
-		libretto.add(v1);
+		try {
+	    libretto.add(v1);
+	    //libretto.add(v11);
 		libretto.add(v2);
 		libretto.add(v3);
 		libretto.add(v4);
@@ -36,9 +41,16 @@ public class TestLibretto {
 		libretto.add(v8);
 		libretto.add(v9);
 		libretto.add(v10);
+		//libretto.add(v10);
+		}catch(InvalidParameterException in) {
+			System.out.println(in.getMessage());
+		}
 		
 		System.out.println(libretto.toString());
+	//	System.out.println(libretto.descrivitiLibrettoMigliorato());
+		
 		//stampa tutti i corsi in cui il voto è pari a 25
+		System.out.println("Libretto dei corsi con voto pari a 25");
 		List<Voto> listaVotiPariA25 = new ArrayList<Voto>();
 		listaVotiPariA25 = libretto.punteggioDi25(25);
 		
@@ -48,6 +60,17 @@ public class TestLibretto {
 		Libretto librettoDei25 = libretto.VotiUguagli(25);
 		System.out.println(librettoDei25);
 		
+		System.out.println("******cerca Esame***");
+		Voto votoTrovato = libretto.ricercaVoto("droni");
+		System.out.println(votoTrovato);
+		
+		System.out.println("******Conflitto***");
+		Voto doppione = new Voto ("droni", 25, LocalDate.of(2012, 9, 4));
+		Voto conflitto = new Voto ("droni", 27, LocalDate.of(2012, 9, 4));
+		boolean esistedoppio = libretto.esisteDupplicato(doppione);
+		boolean esisteConflitto = libretto.esisteConflitto(conflitto);
+		System.out.println(esistedoppio); //votoTrovato + "è un doppione di "+doppione+ "? -->" +esistedoppio);
+		System.out.println(esisteConflitto); //votoTrovato + "è un doppione di "+conflitto+ "? -->" +esistedoppio);
 	}
 
 }
